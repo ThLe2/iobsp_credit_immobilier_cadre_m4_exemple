@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Exemple commenté — l&#x27;offre la moins chère n&#x27;est pas celle qu&#x27;on croit</title><style>
+:root{--prune:#8C1E70;--prune-fonce:#5E1349;--prune-clair:#F4E6EE;--accent:#C77BAA;
+ --vert:#283C28;--gris:#3C3C3C;--gris-moyen:#8A7A85;--filet:#E8DCE5;--creme:#FAF6F8;
+ --ok:#2F7A4F;--ko:#B23B3B;--amb:#B5852A;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--creme);color:var(--gris);
+ font-family:"Nunito","Segoe UI",Helvetica,Arial,sans-serif;font-size:16px;line-height:1.62}
+.wrap{max-width:900px;margin:0 auto;padding:0 18px 60px}
+header.bandeau{background:var(--prune-fonce);color:#fff;padding:18px 0;border-bottom:4px solid var(--accent)}
+header.bandeau .wrap{padding-bottom:0}
+.chapitre{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#EAD3E3}
+.chapitre span{color:var(--accent);margin:0 6px}
+h1{font-family:Georgia,"Times New Roman",serif;font-size:27px;line-height:1.25;margin:8px 0 4px;color:#fff}
+.sous{color:#EAD3E3;font-size:14.5px;margin:0}
+h2{font-family:Georgia,"Times New Roman",serif;font-size:20px;color:var(--prune-fonce);
+ margin:34px 0 0;padding-bottom:8px;border-bottom:2px solid var(--filet)}
+h2 .num{color:var(--accent);margin-right:8px}
+h3{font-size:15px;color:var(--vert);margin:20px 0 8px;letter-spacing:.02em}
+.carte{background:#fff;border:1px solid var(--filet);border-radius:10px;padding:20px 22px;margin:18px 0;
+ box-shadow:0 1px 2px rgba(94,19,73,.05)}
+.enc{background:var(--prune-clair);border-left:5px solid var(--prune);padding:14px 18px;
+ border-radius:0 8px 8px 0;margin:18px 0;font-size:15.2px}
+.enc .t{display:block;font-size:11.5px;letter-spacing:.11em;text-transform:uppercase;
+ font-weight:800;color:var(--prune-fonce);margin-bottom:6px}
+.enc.al{background:#FBF4F4;border-left-color:var(--ko)}.enc.al .t{color:var(--ko)}
+.enc.ci{background:#FCF8F0;border-left-color:var(--amb)}.enc.ci .t{color:#8A6418}
+.situ{background:#FCF9FB;border:1px dashed var(--filet);border-radius:8px;padding:16px 18px;margin:16px 0;font-size:15.2px}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
+.duo>div{background:#fff;border:1px solid var(--filet);border-radius:9px;padding:15px 17px;font-size:14.8px}
+.duo .h{font-weight:800;color:var(--prune-fonce);margin-bottom:7px;font-size:14.5px}
+.tri{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}
+.tri>div{background:#fff;border:1px solid var(--filet);border-radius:9px;padding:14px 15px;font-size:14.3px}
+.quad{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0}
+.quad>div{background:#fff;border:1px solid var(--filet);border-radius:9px;padding:12px 13px;font-size:13.6px}
+.quad .h{font-weight:800;color:var(--prune-fonce);margin-bottom:6px;font-size:13px;
+ text-transform:uppercase;letter-spacing:.04em}
+.tri .h{font-weight:800;color:var(--prune-fonce);margin-bottom:6px;font-size:13.5px;
+ text-transform:uppercase;letter-spacing:.05em}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.8px;background:#fff}
+th,td{border:1px solid var(--filet);padding:9px 12px;text-align:left}
+thead th{background:var(--prune-clair);color:var(--prune-fonce);font-size:13.5px}
+tbody th{font-weight:600;color:var(--gris)}
+td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.tot td,tr.tot th{background:#FBF3F8;font-weight:800;color:var(--prune-fonce)}
+.dl{display:inline-flex;align-items:center;gap:9px;background:var(--prune);color:#fff;text-decoration:none;
+ padding:11px 20px;border-radius:8px;font-weight:700;font-size:15px;margin:20px 0 4px}
+.dl:hover{background:var(--prune-fonce)}
+ol.q{padding-left:0;list-style:none;counter-reset:q}
+ol.q>li{margin:16px 0;padding-left:38px;position:relative}
+ol.q>li::before{counter-increment:q;content:counter(q);position:absolute;left:0;top:1px;
+ width:26px;height:26px;border-radius:50%;background:var(--prune-clair);color:var(--prune-fonce);
+ font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center}
+b,strong{color:var(--vert)}
+footer{text-align:center;font-size:12.5px;color:var(--gris-moyen);padding:26px 18px 12px;
+ border-top:1px solid var(--filet);margin-top:44px}
+@media(max-width:860px){.quad{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.duo,.tri,.quad{grid-template-columns:1fr}h1{font-size:22px}}
+@media print{body{background:#fff}.dl{display:none}header.bandeau{background:#5E1349 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+td{vertical-align:top}td:first-child{white-space:nowrap}.tri{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}.tri>div{background:#fff;border:1px solid var(--filet);border-radius:9px;padding:14px 15px;font-size:14.3px}.tri .h,.duo .h{font-weight:800;color:var(--prune-fonce);margin-bottom:6px;font-size:13.5px;text-transform:uppercase;letter-spacing:.05em}.duo{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}.duo>div{background:#fff;border:1px solid var(--filet);border-radius:9px;padding:15px 17px;font-size:14.8px}@media(max-width:640px){.tri,.duo{grid-template-columns:1fr}}.enc,tr,.tri,.duo{break-inside:avoid}
+.enc p,.cols p{margin:6px 0}.enc.ok{background:#F1F7F3;border-left-color:var(--ok)}.enc.ok .t{color:var(--ok)}
+.cols{display:grid;gap:14px;margin:16px 0}.cols.c2{grid-template-columns:1fr 1fr}.cols.c3{grid-template-columns:repeat(3,1fr)}.cols.c4{grid-template-columns:repeat(4,1fr)}.cols.c5,.cols.c6{grid-template-columns:repeat(3,1fr)}
+.cols>div>.enc{margin:0;height:100%}.cols table{margin:0}
+p.src{font-size:12.5px;color:var(--gris-moyen);line-height:1.5}
+td,th{vertical-align:top}
+@media(max-width:760px){.cols.c2,.cols.c3,.cols.c4,.cols.c5,.cols.c6{grid-template-columns:1fr}}
+table.frise{table-layout:fixed;font-size:13px}.enc h3{margin:2px 0 8px;font-family:Georgia,serif;color:var(--prune-fonce);font-size:16px}
+.cols>div>.enc{margin:0}
+</style></head><body>
+<header class="bandeau"><div class="wrap"><div class="chapitre">IOBSP NIVEAU 2 · JOURNÉE 5 · CRÉDIT IMMOBILIER (1/3) — MODULE 4</div><h1>Exemple commenté — l&#x27;offre la moins chère n&#x27;est pas celle qu&#x27;on croit</h1><p class="sous">Deux propositions, deux taux affichés, et la démonstration par les chiffres</p></div></header>
+<main class="wrap">
+<div class="enc"><span class="t">LA SITUATION</span><p><b>M. et M me Oberlin</b> empruntent <b>200 000 €</b> sur <b>20 ans</b> pour leur résidence principale. Deux banques répondent.</p><table><thead><tr><th></th><th><b>Offre A</b></th><th><b>Offre B</b></th></tr></thead><tbody><tr><td><b>Taux nominal affiché</b></td><td><b>3,10%</b></td><td>3,25%</td></tr><tr><td><b>Assurance emprunteur</b></td><td>50,00 € / mois</td><td><b>28,00 € / mois</b></td></tr><tr><td><b>Frais de dossier et de garantie</b></td><td>3 000 €</td><td><b>1 500 €</b></td></tr></tbody></table><p><b>M. Oberlin a déjà tranché:</b> « L&#x27;offre A est à 3,10, l&#x27;autre à 3,25. C&#x27;est mathématique.»</p><p><i>Clients et offres fictifs. Les calculs, eux, sont exacts et reproductibles.</i></p></div>
+<table><tbody><tr><td></td><td><b>La démonstration</b></td></tr></tbody></table>
+<table><thead><tr><th></th><th><b>Offre A</b></th><th><b>Offre B</b></th></tr></thead><tbody><tr><td><b>Taux nominal</b></td><td>3,10%</td><td>3,25%</td></tr><tr><td><b>Mensualité hors assurance</b></td><td>1 119,23 €</td><td>1 134,39 €</td></tr><tr><td><b>Assurance mensuelle</b></td><td>50,00 €</td><td>28,00 €</td></tr><tr><td><b>ÉCHÉANCE TOTALE</b></td><td>1 169,23 €</td><td><b>1 162,39 €</b></td></tr><tr><td><b>Coût total du crédit</b></td><td>83 616,11 €</td><td><b>80 473,97 €</b></td></tr><tr><td><b>TAEG</b></td><td>3,83%</td><td><b>3,67%</b></td></tr></tbody></table>
+<div class="enc"><span class="t">LE VERDICT</span><p><b>L&#x27;offre B, qui affiche le taux nominal le PLUS ÉLEVÉ, est la moins chère.</b><br>Elle coûte <b>3 142 € de moins</b> sur la durée du prêt, et son échéance mensuelle est inférieure de près de 7 €.<br><b>Le TAEG le dit en un seul chiffre: 3,67% contre 3,83%.</b> C&#x27;est très exactement ce à quoi il sert.</p></div>
+<div class="enc al"><span class="t">CE QUI A RENVERSÉ LA COMPARAISON</span><p>Deux éléments, tous deux <b>invisibles dans le taux nominal</b>:<br><b>L&#x27;assurance</b> — 22 € d&#x27;écart mensuel, soit <b>5 280 € sur vingt ans</b>. C&#x27;est elle qui fait la différence, et c&#x27;est la raison pour laquelle l&#x27;écart entre affichage et réalité est plus important en immobilier qu&#x27;en crédit à la consommation.<br><b>Les frais</b> — 1 500 € d&#x27;écart, payés dès le départ.<br>L&#x27;écart de taux nominal (0,15 point) coûte 3 638 € d&#x27;intérêts supplémentaires à l&#x27;offre B: <b>il ne compense pas les 6 780 € qu&#x27;elle fait</b> <b>économiser par ailleurs</b>.</p></div>
+<table><tbody><tr><td></td><td><b>Ce que M. Oberlin va demander ensuite</b></td></tr></tbody></table>
+<div class="enc"><h3>« Et les frais de notaire ? Ils ne sont pas dans votre TAEG ?»</h3><p>Excellente question, et la réponse surprend toujours.</p><table><thead><tr><th><b>Frais</b></th><th><b>Dans le TAEG ?</b></th><th><b>Pourquoi</b></th></tr></thead><tbody><tr><td><b>Frais de notaire liés à l&#x27;ACQUISITION</b> <b>≈ 7 à 8% du prix dans l&#x27;ancien</b></td><td><b>NON</b></td><td>Ils sont dus <b>que le bien soit financé à crédit ou</b> <b>payé comptant</b>. Ils appartiennent à <b>l&#x27;achat</b>, pas au <b>prêt</b>: ils ne conditionnent pas l&#x27;octroi</td></tr><tr><td><b>Frais de GARANTIE</b> <b>inscription de la sûreté</b></td><td><b>OUI</b>, s&#x27;ils sont connus et déterminables</td><td><b>Sans garantie, pas de prêt.</b> Ils conditionnent l&#x27;octroi</td></tr></tbody></table><div class="enc al"><span class="t">LA NUANCE À SAVOIR EXPLIQUER</span><p><b>Ces deux frais sont perçus par le MÊME notaire</b>, et pourtant l&#x27;un entre dans le TAEG et l&#x27;autre non.<br><b>Ce n&#x27;est pas l&#x27;identité de celui qui encaisse qui départage: c&#x27;est le CONDITIONNEMENT.</b> Le critère du TAEG est unique — tout ce sans quoi le prêt ne peut pas être obtenu.</p></div></div>
+<div class="enc"><h3>« Ma banque me demande de souscrire des parts sociales. Ça compte ?»</h3><p><b>Oui, si la souscription conditionne l&#x27;octroi du prêt.</b> La Cour de cassation l&#x27;a jugé dès 2004 et l&#x27;a réaffirmé depuis: le montant de ces parts doit être intégré au calcul du taux.</p><div class="enc ci"><span class="t">LE FIL CONDUCTEUR</span><p>Vous retrouvez toujours le même critère. Peu importe l&#x27;intitulé — frais, commission, parts sociales, assurance: <b>si le prêt ne peut</b> <b>pas être obtenu sans, cela entre dans le TAEG</b>.</p></div></div>
+<table><tbody><tr><td></td><td><b>Le dossier voisin — quand l&#x27;assurance fait tout basculer</b></td></tr></tbody></table>
+<div class="enc"><h3>M me Rouvier, 58 ans, antécédent de santé déclaré</h3><p>Même montant, même durée, taux nominal négocié à un niveau tout à fait acceptable. Mais la tarification de l&#x27;assurance, compte tenu de l&#x27;âge et du risque déclaré, fait grimper le TAEG au-delà du taux d&#x27;usure applicable à la catégorie.</p><span class="t">QUE SE PASSE-T-IL ?</span><p><b>Le dossier est refusé</b> — non parce que M me Rouvier n&#x27;est pas solvable, mais parce que <b>le taux est devenu illégal</b>. Le TAEG doit rester inférieur au taux d&#x27;usure, fixé trimestriellement par la Banque de France par catégorie de prêt.</p><div class="enc al"><span class="t">LA SANCTION SI LE PRÊTEUR PASSE OUTRE</span><p>Les sommes perçues au-delà du seuil s&#x27;imputent sur les intérêts échus, puis sur le capital, et sont restituées si le prêt est soldé (art. L. 341-48); l&#x27;usure est en outre un délit (art. L. 341-50). Aucune banque ne prend ce risque.</p></div><div class="enc ok"><p><b>CE QU&#x27;IL RESTE À FAIRE — ET CELA PRÉPARE LA JOURNÉE 9</b></p><p>Chercher une <b>assurance moins chère</b> à garanties équivalentes. C&#x27;est tout l&#x27;enjeu du libre choix de l&#x27;assurance emprunteur, que vous étudierez à la journée 9. Sur ce type de dossier, <b>le courtier en assurance fait plus pour le client que le négociateur de taux</b>.</p></div></div>
+<table><tbody><tr><td></td><td><b>Le taux capé — ce que le client doit comprendre</b></td></tr></tbody></table>
+<div class="enc"><h3>La troisième banque propose un taux variable capé + 1</h3><table><thead><tr><th><b>Question du client</b></th><th><b>Réponse</b></th></tr></thead><tbody><tr><td><b>« C&#x27;est comme un taux fixe, alors ?</b> <b>»</b></td><td><b>Non.</b> C&#x27;est un taux <b>variable</b>, dont la variation est <b>plafonnée</b>. Il peut monter — mais pas de plus d&#x27;un point au-dessus de son niveau initial</td></tr><tr><td><b>« Qui prend le risque ?»</b></td><td><b>Il est partagé.</b> Vous supportez la hausse <b>jusqu&#x27;au cap</b>, la banque <b>au-delà</b>. C&#x27;est pourquoi le taux de départ d&#x27;un capé est un peu plus élevé que celui d&#x27;un variable sec</td></tr><tr><td><b>« Et si les taux baissent ?»</b></td><td><b>Question essentielle: le cap joue-t-il aussi À LA BAISSE ?</b> Beaucoup de contrats sont capés dans les deux sens — ce qui limite le gain autant que la perte</td></tr><tr><td><b>« Ma mensualité peut changer ?»</b></td><td><b>Cela dépend du contrat.</b> Une révision peut faire varier <b>l&#x27;échéance</b>, la <b>durée</b>, ou les deux. Ce n&#x27;est pas la même chose pour vous — et <b>c&#x27;est écrit au contrat</b></td></tr></tbody></table></div>
+<table><tbody><tr><td></td><td><b>Et pour finir — la question du tableau d&#x27;amortissement</b></td></tr></tbody></table>
+<div class="enc"><h3>« Au bout de cinq ans, j&#x27;aurai remboursé le quart, non ?»</h3><p><b>Non, et de loin.</b> L&#x27;échéance est constante, mais <b>sa composition ne l&#x27;est pas</b>: les intérêts se calculent sur le <b>capital restant dû</b>, maximal au début. Les premières échéances remboursent donc surtout des intérêts.</p><div class="enc"><span class="t">DEUX CONSÉQUENCES QUE VOS CLIENTS DOIVENT CONNAÎTRE</span><p><b>Un remboursement anticipé est d&#x27;autant plus intéressant qu&#x27;il intervient TÔT</b>: il supprime les intérêts futurs, calculés sur un capital encore élevé.<br><b>Une revente rapide laisse un capital restant dû proche du montant emprunté.</b> Si le prix du bien a baissé entre-temps, le prix de vente ne couvre pas la dette — et le vendeur doit compléter.</p></div></div>
+<div class="enc ok"><p><b>CE QUE L&#x27;EXEMPLE DÉMONTRE</b></p><p><b>Le taux nominal ne compare rien.</b> Sur le dossier Oberlin, l&#x27;offre affichant le taux le plus élevé est la moins chère de 3 142 €, parce que l&#x27;assurance et les frais pèsent davantage que 0,15 point de taux.</p><p><b>Le TAEG dit tout cela en un chiffre</b> — à condition de savoir ce qu&#x27;il contient. Et le critère est unique et simple: <b>tout ce qui conditionne</b> <b>l&#x27;octroi du crédit</b>. Les frais de notaire d&#x27;acquisition n&#x27;y entrent pas; les frais de garantie, si.</p><p><i>Ce module s&#x27;arrête ici: il donne les outils de lecture. La journée 7 les appliquera à chaque produit, et la journée 11 les vérifiera sur la fiche</i> <i>standardisée d&#x27;information.</i></p></div>
+<p><i>Sources vérifiées au 19 août 2026: code de la consommation, art. L. 314-1 et suivants (TAEG), R. 314-2 et R. 314-3 (méthodes de calcul), L. 314-6 (usure) · directive 2014/17/</i> <i>UE transposée par l&#x27;ordonnance n° 2016-351 du 25 mars 2016 · arrêté du 18 juillet 2022, annexe A. Les calculs de ce document ont été effectués et vérifiés en interne:</i> <i>mensualités par la formule d&#x27;annuité constante, TAEG par résolution itérative de l&#x27;équation actuarielle. Clients et offres fictifs. Aucun seuil d&#x27;usure n&#x27;est chiffré: il change</i> <i>chaque trimestre.</i></p>
+</main>
+<footer>TMK Performances - N° Siret : 49841924100027 - Code NAF : 8559A</footer>
+</body></html>
